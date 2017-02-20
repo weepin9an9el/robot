@@ -1,7 +1,3 @@
-#define F_CPU 1000000
-
-#include "lcd.h"
-
 void pulseEn(void)
 {
 //enable pin is active low

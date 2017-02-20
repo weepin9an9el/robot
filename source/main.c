@@ -1,17 +1,21 @@
-#define F_CPU 1000000 //1MHz clock, default
+#define F_CPU 16000000 //16MHz clock, default
 
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
+#include "lcd.h"
+
 
 void main(void)
 {
-char lbuffer[16], rbuffer[16];
-float lresult, rresult;
+char lbuffer[16];
+//char rbuffer[16];
+float lresult;
+//float rresult;
 
 initLCD();
 initADC();
-initServo();
+//initServo();
 
 sndCmd(0x80); //go to first column, row 0
 writeString("LtSens = ");
@@ -20,7 +24,7 @@ writeString("LtSens = ");
 
 while(1)
 {
-	lresult = readADC()*0.00488; //back calculate the left sensor voltage by using the ADC result formula [4.8mV per step]
+	lresult = readADC(1)*0.00488; //back calculate the left sensor voltage by using the ADC result formula [4.8mV per step]
 //	rresult = readright()*0.00488; //back calculate the right sensor voltage by using the ADC result formula [4.8mV per step]
 
 	sprintf(lbuffer, "%0.3f", lresult);

@@ -1,5 +1,3 @@
-#include "main.h"
-
 #define pinRS PD6
 #define pinEN PD7
 
