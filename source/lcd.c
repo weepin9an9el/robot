@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <avr/io.h>
+#include "lcd.h"
+
 void pulseEn(void)
 {
 //enable pin is active low

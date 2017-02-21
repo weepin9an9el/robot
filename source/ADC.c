@@ -1,3 +1,6 @@
+#include <avr/io.h>
+#include <stdio.h>
+
 void initADC(void) //function to initialize the ADC registers
 {
 /*-------------------------------SETUP THE ADMUX REGISTER----------------------------------*/
