@@ -1,3 +1,5 @@
+#define F_CPU 16000000 //16MHz clock, default
+
 #define pinRS PD6
 #define pinEN PD7
 
