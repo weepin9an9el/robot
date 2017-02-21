@@ -27,14 +27,15 @@ all: main.hex
 main.hex: main.elf
 	$(OC) -j .text -j .data $(OC_FLAGS) $< $@
 
-main.elf: main.o servo.o ADC.o lcd.o
-	$(CC) -mmcu=$(MCU) $(LD_FLAGS) -o $@ main.o servo.o ADC.o lcd.o
+#add servo.o once ready to compile the servo code in
+main.elf: main.o ADC.o lcd.o
+	$(CC) -mmcu=$(MCU) $(LD_FLAGS) -o $@ main.o ADC.o lcd.o
 
 main.o: main.c
 	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
 
-servo.o: servo.c
-	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
+#servo.o: servo.c
+#	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
 
 ADC.o: ADC.c
 	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
