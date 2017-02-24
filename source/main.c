@@ -9,10 +9,11 @@ void main(void)
 float lresult;
 //float rresult;
 
-initLCD();
+
 initADC();
 initServo();
-
+//Uncomment the initLCD function below if you want LCD support
+//initLCD();
 while(1)
 {
 	lresult = readADC(1)*0.00488; //back calculate the left sensor voltage by using the ADC result formula [4.8mV per step]
