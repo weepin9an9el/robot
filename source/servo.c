@@ -1,3 +1,6 @@
+#include <avr/io.h>
+
+
 /*************************************************************************************************************************************
 		MODIFIED SERVOS -- NEED TO FIND CENTER AND DETERMINE DIRECTION OF ROTATION
 		I DID THIS THROUGH TRIAL AND ERROR, PLAYING WITH THE OCR1x NUMBERS, SPLITTING
