@@ -27,21 +27,26 @@ all: main.hex
 main.hex: main.elf
 	$(OC) -j .text -j .data $(OC_FLAGS) $< $@
 
-#add servo.o once ready to compile the servo code in
-main.elf: main.o ADC.o lcd.o
-	$(CC) -mmcu=$(MCU) $(LD_FLAGS) -o $@ main.o ADC.o lcd.o
+#Use the below main.elf if you don't want lcd support
+main.elf: main.o ADC.o servo.o
+	$(CC) -mmcu=$(MCU) $(LD_FLAGS) -o $@ main.o ADC.o servo.o
+
+#Use the below main.elf if want lcd support
+#Also, will need to uncomment the lcd.o recipe below	
+#main.elf: main.o ADC.o lcd.o servo.o
+#	$(CC) -mmcu=$(MCU) $(LD_FLAGS) -o $@ main.o ADC.o lcd.o servo.o
 
 main.o: main.c
 	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
 
-#servo.o: servo.c
-#	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
+servo.o: servo.c
+	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
 
 ADC.o: ADC.c
 	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
 
-lcd.o: lcd.c
-	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
+#lcd.o: lcd.c
+#	$(CC) $(CC_FLAGS) -mmcu=$(MCU) -o $@ $<
 
 #all: lcd.hex
 #lcd.o: lcd.c

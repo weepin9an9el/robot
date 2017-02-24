@@ -1,7 +1,3 @@
-#include "servo.h"
-
-
-
 /*************************************************************************************************************************************
 		MODIFIED SERVOS -- NEED TO FIND CENTER AND DETERMINE DIRECTION OF ROTATION
 		I DID THIS THROUGH TRIAL AND ERROR, PLAYING WITH THE OCR1x NUMBERS, SPLITTING
@@ -45,51 +41,3 @@ DDRB |= (1<<PB1) | (1<<PB2); //portB, pins 1 and 2 are outputs for servo PWM
 }
 
 
-void testServo(void)
-{
-
-
-//setupTimer();
-
-while(1)
-{
-
-OCR1A=436;	//move forward for one second
-OCR1B=435;
-_delay_ms(2000); //delay 1 sec
-
-OCR1A=386;	//stop before changing directions
-OCR1B=385;
-_delay_ms(1000); //delay 1 sec
-
-OCR1A=436;	//turn to left by moving left wheel forward, right wheel reverse
-OCR1B=335;
-_delay_ms(2000); //delay 1 sec
-
-OCR1A=386; 	//stop 
-OCR1B=385;
-_delay_ms(1000);
-
-OCR1A=436;	//move forward for one second
-OCR1B=435;
-_delay_ms(2000); //delay 1 sec
-
-OCR1A=386;	//stop before changing directions
-OCR1B=385;
-_delay_ms(1000);  //delay 1 sec
-
-OCR1A=336;	//turn to the right by moving right wheel forward, left wheel reverse
-OCR1B=435;
-_delay_ms(4000); //delay 1 sec
-
-OCR1A=386;	//stop
-OCR1B=385;
-_delay_ms(1000); //delay 1 sec
-
-OCR1A=336;	//move backwards from current position
-OCR1B=335;
-_delay_ms(5000); //delay 5 sec
-
-} //end of while loop
-
-} //end of function
