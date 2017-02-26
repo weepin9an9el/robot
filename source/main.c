@@ -16,8 +16,8 @@ initServo();
 //initLCD();
 while(1)
 {
-	lresult = readADC(1)*0.00488; //back calculate the left sensor voltage by using the ADC result formula [4.8mV per step]
-//	rresult = readright()*0.00488; //back calculate the right sensor voltage by using the ADC result formula [4.8mV per step]
+	lresult = readADC(2); //read from ADC channel 2 for the left channel
+//	rresult = readADC(3); //read from ADC channel 3 for the right channel
 
 	if (lresult >= 920) //~4.5 volts -- no object detected so keep moving
 		OCR1A = 436;

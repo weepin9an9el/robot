@@ -26,9 +26,18 @@ ADCSRA |= (1<<ADEN);
 
 uint16_t readADC(int channel)
 {
-if (channel==1)
-	ADMUX |= (1<<MUX0);
-	
+//first, I need to set the ADMUX register to read from the appropriate ADC channel.  
+//I have only wired up channels 2 and 3, so our MUX bits will be 
+//(MUX3..0 = 0010) -> channel 2	
+//(MUX3..0 = 0011) -> channel 3	
+
+ADMUX |= (1<<MUX1);  //this bit is set regardless of reading from channel 2 or 3
+
+if (channel==3)
+	ADMUX |= (1<<MUX0); //need to set this bit to read channel 3, in addition to MUX 1 (MUX3..0=0011)
+else
+	ADMUX &= ~(1<<MUX0); //clear MUX 0 to read from channel 2
+
 ADCSRA |= (1<<ADSC); //start conversion
 
 while (!(ADCSRA & (1<<ADIF))); //do nothing till conversion is complete (ADIF becomes 1)
