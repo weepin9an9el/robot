@@ -22,9 +22,9 @@ while(1)
 	lresult = readADC(2); //read from ADC channel 2 for the left channel
 	rresult = readADC(3); //read from ADC channel 3 for the right channel
 	
-	if (lresult >= 900) //no object on the left side
+	if (lresult >= 950) //no object on the left side
 	{
-		if (rresult >=900) //no object on the right side, keep moving forward
+		if (rresult >=950) //no object on the right side, keep moving forward
 		{	
 			for (i=250; i>0; i--)
 			{
@@ -46,7 +46,7 @@ while(1)
 	
 	else 				//object on the left side
 	{
-		if (rresult >=900) //no object on the right side, stop left wheel turn hard right
+		if (rresult >=950) //no object on the right side, stop left wheel turn hard right
 		{	
 			for (i=250; i>0; i--)
 			{
