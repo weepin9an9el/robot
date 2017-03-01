@@ -15,8 +15,6 @@ initServo();
 //Uncomment the initLCD function below if you want LCD support
 //initLCD();
 
-_delay_ms(500); //just a startup delay
-
 while(1)
 {
 	lresult = readADC(2); //read from ADC channel 2 for the left channel
@@ -66,7 +64,12 @@ while(1)
 		}	
 	}
 	
-	_delay_ms(500); //wait half a second before taking next reading 
+	for (i=500; i>0; i--) //stop car and wait half a second before taking next reading
+	{
+		OCR1A=386;
+		OCR1B=386;
+		_delay_ms(1);
+	}  
 	
 } //end of while(1) loop
 
