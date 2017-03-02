@@ -17,6 +17,10 @@ initServo();
 
 while(1)
 {
+	OCR1A=386;
+	OCR1B=386;
+	_delay_ms(1000);
+	
 	lresult = readADC(2); //read from ADC channel 2 for the left channel
 	rresult = readADC(3); //read from ADC channel 3 for the right channel
 	
@@ -64,12 +68,7 @@ while(1)
 		}	
 	}
 	
-	for (i=500; i>0; i--) //stop car and wait half a second before taking next reading
-	{
-		OCR1A=386;
-		OCR1B=386;
-		_delay_ms(1);
-	}  
+ 
 	
 } //end of while(1) loop
 
