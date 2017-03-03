@@ -23,8 +23,8 @@ void initTimerzero(void)
 	//15,624-(61*255) = 69
 	//So, count 61 full overflows then count to 69 on the next overflow, all at a prescaler of 1024 to hit 1 second.
 	
-	//Finally, initialize TCNT0 and tot_overflows to zero 
-	TCNT0 = 0;
+	//Finally, initialize tot_overflows to zero 
+	
 	tot_overflows = 0;
 	
 }
@@ -47,34 +47,32 @@ sei(); //enable global interrupts now that everything is intialized
 
 while(1)
 {
-	tot_overflows = 0;
-	while (tot_overflows < 62){
-	OCR1A=386;
-	OCR1B=386;
+	if (tot_overflows <62)
+	{
+		OCR1A=386;
+		OCR1B=386;
 	}
-	
+	else{
 	lresult = readADC(2); //read from ADC channel 2 for the left channel
 	rresult = readADC(3); //read from ADC channel 3 for the right channel
 	
 	if (lresult >= 950) //no object on the left side
 	{
-		if (rresult >=950) //no object on the right side, keep moving forward
+		if (rresult >= 950) //no object on the right side, keep moving forward
 		{	
-			for (i=250; i>0; i--)
-			{
+			
 				OCR1A=436;
 				OCR1B=436;
 				_delay_ms(1000);
-			}
+			
 		}
 		else				//object detected on right side so stop right wheel turn hard left
 		{	
-			for (i=250; i>0; i--)
-			{
+			
 				OCR1A=436;
 				OCR1B=386;
 				_delay_ms(1000);
-			}
+			
 		}	
 	}
 	
@@ -82,24 +80,23 @@ while(1)
 	{
 		if (rresult >=950) //no object on the right side, stop left wheel turn hard right
 		{	
-			for (i=250; i>0; i--)
-			{
+			
 				OCR1A=386;
 				OCR1B=436;
 				_delay_ms(1000);
-			}
+			
 		}
 		else				//object on both sides; stop until a path clears
 		{	
-			for (i=250; i>0; i--)
-			{
+			
 				OCR1A=386;
 				OCR1B=386;
 				_delay_ms(1000);
-			}
+			
 		}	
 	}
-	
+		tot_overflows = 0;
+	}// end of "tot_overflows <62" else statement	
  
 	
 } //end of while(1) loop
